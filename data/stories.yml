@@ -1,0 +1,27 @@
+version: "3.1"
+
+stories:
+- story: event registration happy path
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: register_event
+    - action: utter_ask_name
+    - intent: provide_name
+      entities:
+        - name: "John Doe"
+    - slot_was_set:
+        - name: "John Doe"
+    - action: utter_ask_email
+    - intent: provide_email
+      entities:
+        - email: "john@example.com"
+    - slot_was_set:
+        - email: "john@example.com"
+    - action: utter_ask_phone
+    - intent: provide_phone
+      entities:
+        - phone: "9876543210"
+    - slot_was_set:
+        - phone: "9876543210"
+    - action: action_register_participant

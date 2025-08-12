@@ -1,0 +1,60 @@
+version: "3.1"
+
+intents:
+  - greet
+  - register_event
+  - provide_name
+  - provide_email
+  - provide_phone
+  - thank
+  - goodbye
+
+entities:
+  - name
+  - email
+  - phone
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+
+  email:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: email
+
+  phone:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: phone
+
+
+responses:
+  utter_greet:
+    - text: "Hello! How can I help you today?"
+
+  utter_ask_name:
+    - text: "Great! Could you tell me your full name?"
+
+  utter_ask_email:
+    - text: "Please provide your email address."
+
+  utter_ask_phone:
+    - text: "Please provide your phone number."
+
+  utter_thank:
+    - text: "You're welcome! Have a great day."
+
+  utter_goodbye:
+    - text: "Goodbye!"
+
+actions:
+  - action_register_participant

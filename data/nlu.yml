@@ -1,0 +1,58 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey there
+    - good morning
+    - good evening
+
+- intent: register_event
+  examples: |
+    - I want to register for the event
+    - register me for the conference
+    - sign me up for the workshop
+    - I want to join the event
+    - register for event
+
+- intent: provide_name
+  examples: |
+    - My name is [John Doe](name)
+    - It's [Kaviya](name)
+    - [Michael](name)
+    - Call me [Priya](name)
+
+- intent: provide_email
+  examples: |
+    - My email is [john@example.com](email)
+    - [kaviya123@gmail.com](email)
+    - send it to [peter@yahoo.com](email)
+
+- intent: provide_phone
+  examples: |
+    - My phone number is [9876543210](phone)
+    - It's [9123456789](phone)
+    - Call me at [9001234567](phone)
+
+- intent: thank
+  examples: |
+    - thanks
+    - thank you
+    - much appreciated
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you later
+
+- regex: phone_number
+  examples: |
+    - \d{10}
+
+- regex: email
+  examples: |
+    - [a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+
+

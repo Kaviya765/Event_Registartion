@@ -1,0 +1,14 @@
+{
+  "0": "ask_event_date",
+  "1": "ask_event_location",
+  "2": "ask_food",
+  "3": "ask_plus_one",
+  "4": "goodbye",
+  "5": "greet",
+  "6": "provide_email",
+  "7": "provide_name",
+  "8": "provide_phone",
+  "9": "register_event",
+  "10": "show_participants",
+  "11": "thank"
+}
