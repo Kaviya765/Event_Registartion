@@ -36,6 +36,12 @@ slots:
       - type: from_entity
         entity: phone
 
+forms:
+  registration_form:
+    required_slots:
+      - name
+      - email
+      - phone
 
 responses:
   utter_greet:

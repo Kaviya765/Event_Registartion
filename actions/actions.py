@@ -1,16 +1,15 @@
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-
-# Pre-registered participants
-participants = [
-    {"name": "Alice Johnson", "email": "alice.j@example.com", "phone": "9876543210"},
-    {"name": "Bob Smith", "email": "bob.smith@gmail.com", "phone": "9123456789"},
-    {"name": "Priya Sharma", "email": "priya.sharma@yahoo.com", "phone": "9001234567"},
-    {"name": "Rahul Kumar", "email": "rahul.k@outlook.com", "phone": "9988776655"},
-]
+from pymongo import MongoClient
 
 class ActionRegisterParticipant(Action):
+
+    def __init__(self):
+        # Connect once when the action server starts
+        self.client = MongoClient("mongodb://localhost:27017/")
+        self.db = self.client["event_db"]
+        self.participants_collection = self.db["participants"]
 
     def name(self) -> Text:
         return "action_register_participant"
@@ -23,19 +22,22 @@ class ActionRegisterParticipant(Action):
         user_email = tracker.get_slot("email")
         user_phone = tracker.get_slot("phone")
 
-        # Save new participant
-        participants.append({
+        # Insert new participant into MongoDB
+        self.participants_collection.insert_one({
             "name": user_name,
             "email": user_email,
             "phone": user_phone
         })
+
+        # Fetch all participants to display
+        participants = list(self.participants_collection.find())
 
         # Confirmation message
         dispatcher.utter_message(
             text=f"✅ Registration successful!\n\nName: {user_name}\nEmail: {user_email}\nPhone: {user_phone}\nWe’ll send you event updates soon."
         )
 
-        # Optional: show all registered users
+        # Show all registered users
         dispatcher.utter_message(text="📋 Current Registered Participants:")
         for p in participants:
             dispatcher.utter_message(text=f"- {p['name']} ({p['email']}, {p['phone']})")
